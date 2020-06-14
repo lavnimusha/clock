@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Clock</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            body{
+                box-sizing: border-box;
+                background-image: linear-gradient(#87CEEB,#FFB6C1);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .round{
+                -moz-border-radius: 160px/160px;
+                -webkit-border-radius: 160px 160px;
+                border-radius: 160px/160px;
+                border: solid 15px white;
+                width: 160px;
+                height: 160px;
+                position: absolute;
+                top: 20%;
+                left: 40%;
+                align-content: center;
+            }
+            
+            .hand{
+                width: 50%;
+                height: 1px;
+                position: absolute;
+                top: 50%;
+                background-color: black;
+                transform-origin: 100%;
+                transform: rotate(90deg);
+                transition: all 0.5s;
+                transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+            }
+            .min_hand{
+                height: 3px;
+            }
+            .hr_hand{
+                height: 6px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="round">
+            <div class = "hand min_hand"></div>
+            <div class = "hand hr_hand"></div> 
+            <div class = "hand sec_hand"></div>
+        </div>
+        <script>
+            var secondshand = document.querySelector(".sec_hand");
+            var minutehand = document.querySelector(".min_hand");
+            var hourhand = document.querySelector(".hr_hand");
+        function clock(){
+            const time = new Date();
+            //const sec = ((((time.getSeconds()) / 60) * 360) + 90);
+            const sec = ((time.getSeconds() * 6) + 90);
+            secondshand.style.transform = `rotate(${sec}deg)`;
+
+            const min = ((((time.getMinutes()) / 60) * 360) + 90);
+            minutehand.style.transform = `rotate(${min}deg)`;
+
+            const hr = ((((time.getHours()) / 60) * 360) + 90);
+            hourhand.style.transform = `rotate(${hr}deg)`;
+            console.log(time.getSeconds() + " min" + time.getMinutes() + " hr" + time.getHours());
+        }
+        setInterval(clock,1000);
+        </script>
+    </body>
+</html>
